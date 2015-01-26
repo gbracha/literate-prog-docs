@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 0.9.0-beta" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta name="author" content="Ministry of Truth" />
+  <title>Newspeak by Example</title>
+  <style  class="link">
+/* ---------------------------------------------------
+   Various settings to display madoko elements correctly.
+   For example, lines in tables or a table of contents.
+
+   All rules use specific madoko classes and never just
+   a generic element. This means one can safely include
+   this CSS into any web page without affecting non-madoko
+   content.
+----------------------------------------------------*/
+
+/* The table of contents */
+.madoko .toc>.tocblock .tocblock .tocblock {
+  margin-left: 2.5em;
+}
+
+.madoko .toc>.tocblock .tocblock {
+  margin-left: 1.7em;
+}
+
+.madoko .toc>.tocblock>.tocitem {
+  font-weight: bold;
+}
+
+.madoko .toc {
+  margin-top: 1em;
+}
+
+/* Paragraphs */
+.madoko p.para-continue {
+  margin-bottom: 0pt;
+}
+
+.madoko .para-block+p {
+  margin-top: 0pt;
+}
+
+.madoko ul.para-block, .madoko ol.para-block {
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+}
+
+.madoko ul.para-end, .madoko ol.para-end {
+  margin-bottom: 1em;
+}
+
+.madoko dl {
+  margin-left: 0em;
+}
+
+/* Local page links do not get an underline unless hovering */
+.madoko a.localref {
+  text-decoration: none;
+}
+.madoko a.localref:hover {
+  text-decoration: underline;
+}
+
+/* Footnotes */
+.madoko .footnotes {
+  font-size: smaller;
+  margin-top: 2em;
+}
+
+.madoko .footnotes hr {
+  width: 50%;
+  text-align: left;
+}
+
+.madoko .footnote { 
+  margin-left: 1em;
+}
+.madoko .footnote-before {
+  margin-left: -1em;
+  width: 1em;
+  display: inline-block;
+}
+
+/* Abstract */
+.madoko .abstract>p:first-child:before {
+  content: "Abstract. ";
+  font-weight: bold;
+}
+
+.madoko .abstract {
+  margin-left: 2.7em;
+  margin-right: 2.7em;
+  font-size: small;
+}
+
+
+/* Alignment */
+.madoko .align-center, .madoko .align-center>p {
+  text-align: center !important;
+}
+
+.madoko .align-center pre {
+  text-align: left;
+}
+
+.madoko .align-center>* {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.madoko .align-left, .madoko .align-left>p {
+  text-align: left !important;
+}
+
+.madoko .align-left>* {
+  margin-left: 0pt !important;
+  margin-right: auto !important;
+}
+
+.madoko .align-right, .madoko .align-right>p {
+  text-align: right !important;
+}
+
+.madoko .align-right>* {
+  margin-left: auto !important;
+  margin-right: 0pt !important;
+}
+
+.madoko .align-center>table,
+.madoko .align-left>table,
+.madoko .align-right>table {
+  text-align: left !important;
+}
+
+
+/* Equations, Figure's etc. */
+.madoko .equation-before {
+  float: right;
+}
+
+
+/* Bibliography */
+.madoko .bibitem {
+  font-size: smaller;
+}
+
+.madoko .bib-numeric .bibitem {
+  margin-left: 3em;
+  text-indent: -3em;
+}
+
+.madoko .bibitem-before {
+  display: none;
+}
+
+.madoko .bib-numeric .bibitem-before {
+  display: inline-block;
+  width: 3em;
+  text-align: right;
+}
+
+.madoko .bibliography {
+}
+
+.madoko .bibsearch {
+  font-size: x-small;
+  text-decoration:none;
+  color: black;
+  font-family: "Segoe UI Symbol", Symbola;
+}
+
+/* General */
+.madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+
+.madoko .figure {
+  padding: 0.5em;
+  margin-left: 0pt;
+  margin-right: 0pt;
+}
+
+.madoko .hidden {
+  display: none;
+}
+
+.madoko .invisible {
+  visibility: hidden;
+}
+
+.madoko.preview .invisible {
+  visibility: visible;
+  opacity: 0.5;
+}
+
+.madoko code.code, .madoko span.code {
+  white-space: pre-wrap;
+}
+
+.madoko hr, hr.madoko {
+  border: none;
+  border-bottom: black solid 1px;
+  margin-bottom: 0.5ex;
+}
+
+.madoko .framed>*:first-child {
+  margin-top: 0pt;
+}
+.madoko .framed>*:last-child {
+  margin-bottom: 0pt;
+}
+
+
+/* Title, authors */
+.madoko .title {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 1ex;
+}
+
+.madoko .subtitle {
+  font-size: x-large;
+  margin-bottom: 1ex;
+  margin-top: -1ex;
+}
+
+.madoko .titleblock>* {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.madoko .titleblock table {
+  width: 80%;
+}
+
+.madoko .authorblock .author {
+  font-size: large;
+}
+
+.madoko .titlenote {
+  margin-top: -0.5ex;
+  margin-bottom: 1.5ex;
+}
+
+/* Lists */
+
+.madoko ul.list-star {
+  list-style-type: disc;
+}
+
+.madoko ul.list-dash {
+    list-style-type: none !important;
+}
+
+.madoko ul.list-dash > li:before {
+    content: "\2013"; 
+    position: absolute;
+    margin-left: -1em; 
+}
+
+.madoko ul.list-plus {
+  list-style-type: square;
+}
+
+/* Tables */
+.madoko table.madoko {
+  border-collapse: collapse;
+}
+.madoko td, .madoko th {
+  padding: 0ex 0.5ex;
+  margin: 0pt;
+  vertical-align: top;
+}
+
+.madoko .cell-border-left {
+  border-left: 1px solid black;
+}
+.madoko .cell-border-right {
+  border-right: 1px solid black;
+}
+
+
+.madoko thead>tr:first-child>.cell-line,
+.madoko tbody:first-child>tr:first-child>.cell-line {
+  border-top: 1px solid black;
+  border-bottom: none;
+}
+
+.madoko .cell-line, .madoko .cell-double-line {
+  border-bottom: 1px solid black;
+  border-top: none;
+}
+
+.madoko .cell-double-line {
+  border-top: 1px solid black;
+  padding-top: 1.5px !important;
+}
+
+
+/* Math Pre */
+.madoko .input-mathpre .MathJax_Display {
+  text-align: left !important;
+}
+
+.madoko div.input-mathpre {
+  text-align: left;
+  margin-top: 1.5ex;
+  margin-bottom: 1ex;
+}
+
+.madoko .math-rendering {
+  color: gray;
+}
+
+/* Math */
+.madoko .mathdisplay {
+  text-align: center;
+}
+
+
+/*---------------------------------------------------------------------------
+  Default style for syntax highlighting
+---------------------------------------------------------------------------*/
+
+.highlighted                        { color: black; }
+.highlighted .token.identifier      { }
+.highlighted .token.operators       { }
+.highlighted .token.keyword         { color: blue }
+.highlighted .token.string          { color: maroon } 
+.highlighted .token.string.escape   { color: gray }
+.highlighted .token.comment         { color: darkgreen }
+.highlighted .token.comment.doc     { font-style: normal }
+.highlighted .token.constant        { color: purple; }
+.highlighted .token.entity          {  }
+.highlighted .token.tag             { color: blue }
+.highlighted .token.info-token      { color: black }
+.highlighted .token.warn-token      { color: black }
+.highlighted .token.error-token     { color: darkred }
+.highlighted .token.debug-token     { color: gray }
+.highlighted .token.regexp          { color: maroon }
+.highlighted .token.attribute.name  { color: navy }
+.highlighted .token.attribute.value { color: maroon }
+.highlighted .token.constructor     { color: purple }
+.highlighted .token.namespace       { color: navy }
+.highlighted .token.header          { color: navy }
+.highlighted .token.type            { color: teal } 
+.highlighted .token.type.delimiter  { color: teal; } 
+.highlighted .token.predefined      { color: navy }
+.highlighted .token.invalid         { border-bottom: red dotted 1px }
+.highlighted .token.code            { color: maroon }
+.highlighted .token.code.keyword    { color: navy }
+.highlighted .token.typevar         { font-style: italic; }
+
+.highlighted .token.delimiter   {  } /* .[curly,square,parenthesis,angle,array,bracket] */
+.highlighted .token.number      {  }    /* .[hex,octal,binary,float] */
+.highlighted .token.variable    {  }  /* .[name,value]  */
+.highlighted .token.meta        { color: navy }      /* .[content] */
+
+.highlighted .token.bold            { font-weight: bold; }
+.highlighted .token.italic          { font-style: italic; }
+
+
+/* Pretty formatting of code */
+.madoko pre.pretty, .madoko code.pretty { 
+  font-family: Cambria,Times,Georgia,serif;
+  font-size: 100%;
+}
+
+.madoko .pretty table {
+  border-collapse: collapse;
+}
+.madoko .pretty td {
+  padding: 0em;
+}
+.madoko .pretty td.empty {
+  min-width: 1.5ex;
+}
+.madoko .pretty td.expander {
+  width: 100em;
+}
+.madoko .pretty .token.identifier         { font-style: italic }
+.madoko .pretty .token.constructor        { font-style: italic }
+
+
+/* ---------------------------------------------------
+   Styling for full documents
+----------------------------------------------------*/
+body.madoko, .madoko-body {
+  font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+  -webkit-text-size-adjust: 100%; /* so math displays well on mobile devices */
+}
+
+body.madoko, .madoko-body {
+  padding: 1em 16% 1em 12%;
+}
+
+body.madoko.preview {
+  padding: 0em 2em 0em 2em;
+}
+
+.madoko p,
+.madoko li {
+  text-align: justify;
+}
+
+/* style headings nicer, especially h5 and h6 */
+.madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+  margin-top: 1.22em; 
+  margin-bottom: 1ex;
+}
+.madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+  margin-top: 1ex;    
+}
+.madoko h5, .madoko h6 { 
+  margin-top: 1ex;
+  font-size: 1em;
+}
+.madoko h5 { 
+  margin-bottom: 0.5ex;
+}
+.madoko h5 + p {
+  margin-top: 0.5ex;
+}
+.madoko h6 { 
+  margin-bottom: 0pt;
+}
+.madoko h6 + p {
+  margin-top: 0pt;
+}
+
+
+/* Fix monospace display (see http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/) */
+.madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, .madoko .monospace, .madoko .token.indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+  font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+  font-size: 0.85em;
+}
+.madoko pre code, .madoko .token.indent {
+  font-size: 0.95em;
+}
+
+.madoko pre code {
+  font-family: inherit !important;
+}
+
+/* Code prettify */
+.madoko ol.linenums li {
+  background-color: white;
+  list-style-type: decimal;
+}
+
+/* Merging */
+.madoko .remote {
+  background-color: #F0FFF0;
+}
+
+/* ---------------------------------------------------
+   Print settings
+----------------------------------------------------*/
+
+@media print {
+  body.madoko, .madoko-body {
+    font-size: 10pt;
+  }
+  @page {
+    margin: 1in 1.5in;
+  }
+}
+
+/* ---------------------------------------------------
+   Mobile device settings
+----------------------------------------------------*/
+
+@media only screen and (max-device-width:1024px) {
+  body.madoko, .madoko-body {
+    padding-left: 1ex;
+    padding-right: 1ex;
+  }
+}
+
+  </style>
+<style>
+                .evaluator + pre {
+                  display: none; 
+                }
+                .preview .evaluator + pre {
+                  display: block;
+                }
+                </style>
+</head>
+<body class="madoko">
+
+<section class='titleblock align-center'><h1 class='title' data-line='1'>Newspeak by Example</h1>
+
+
+<table><tr><td class='authorblock align-center'><div class='author'>Ministry of Truth</div></td></tr></table></section><h2 id="sec-introduction"   style="bookmark:1.&#8194;Introduction"><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span>Introduction</h2>
+<p>In this tutorial, we&#39;ll go through the basics of Newspeak syntax. The
+examples in this document are live. You can change the code and see how
+your changes impact the results right away.
+</p>
+<p class="indent">Each result is a link; if you click on it, it will open an object
+inspector. An object inspector shows you the object&#39;s class and instance
+variables and lets you evaluate further expressions in the context of the
+object.
+</p><h2 id="sec-literals"   style="bookmark:2.&#8194;Literals"><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span>Literals</h2>
+<p>The simplest piece of Newspeak code is a <em>literal</em>.
+Literals include things like numbers, strings of characters and a few others.
+</p><h3 id="sec-numbers"   style="bookmark:2.1.&#8194;Numbers"><span class="heading-before"><span class="heading-label">2.1</span>.&#8194;</span>Numbers</h3>
+<p class="para-continue">Whole numbers, aka <em>integers</em>, are written as you&#39;d expect.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="3" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>3</span></code></pre></div>
+<p class="para-continue">You can write decimal fractions in the obvious way as well.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="3.14159" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number float newspeak'>3.14159</span></code></pre></div><h3 id="sec-strings"   style="bookmark:2.2.&#8194;Strings"><span class="heading-before"><span class="heading-label">2.2</span>.&#8194;</span>Strings</h3>
+<p class="para-continue">A simple piece of text is called a <em>string</em>, and is written between
+single quotes.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="&#39;Hello Brave New World&#39; " data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token string quote newspeak bracket-open'>&apos;</span><span class='token string newspeak'>Hello Brave New World</span><span class='token string quote newspeak bracket-close'>&apos;</span><span class='token white newspeak'> </span></code></pre></div><h3 id="sec-booleans"   style="bookmark:2.3.&#8194;Booleans"><span class="heading-before"><span class="heading-label">2.3</span>.&#8194;</span>Booleans</h3>
+<p class="para-continue">There are two predefined boolean values: <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword newspeak'>true</span></code> and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword newspeak'>false</span></code>.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="false " data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token keyword newspeak'>false</span><span class='token white newspeak'> </span></code></pre></div>
+<p>There are additional literals, but these will do for now.
+</p>
+<p class="indent">Literals are a special case of <em>expressions</em>. In addition to literals, Newspeak 
+expressions include <em>message sends</em>, described below.
+</p><h2 id="sec-message-sends"   style="bookmark:3.&#8194;Message sends"><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span>Message sends</h2>
+<p>In order to cause an object to compute something, you send it a message.  Message 
+sends come in three forms.
+</p><h3 id="sec-unary-sends"   style="bookmark:3.1.&#8194;Unary Sends"><span class="heading-before"><span class="heading-label">3.1</span>.&#8194;</span>Unary Sends</h3>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="9 sqrt" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>9</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>sqrt</span></code></pre></div>
+<p>Notice that there is no dot between <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>9</span></code> and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token identifier newspeak'>sqrt</span></code>.
+</p>
+<p class="indent">A message send always involves a <em>receiver</em> (<code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>9</span></code> above) and a <em>message</em>
+(in our example, <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token identifier newspeak'>sqrt</span></code>). The receiver is the object to whom the
+message is being sent, though sometimes the receiver can be implicit. The
+message always includes a <em>selector</em>, which is a symbol such as
+<code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token identifier newspeak'>sqrt</span></code>.
+</p>
+<p class="indent">The selector determines how many arguments the message can have. If the
+selector is an identifier, then the message has no arguments; the send is
+then called a <em>unary send</em> because it only involves one object, the
+receiver.
+</p><h3 id="sec-binary-sends"   style="bookmark:3.2.&#8194;Binary Sends"><span class="heading-before"><span class="heading-label">3.2</span>.&#8194;</span>Binary Sends</h3>
+<p class="para-continue"><em>Binary sends</em> involve two objects, as you might expect. The first is the
+receiver, and the second is an argument, which is part of the message.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="3 + 4" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span></code></pre></div>
+<p>Above, <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>3</span></code> is the receiver, and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span></code> is the message. The selector is <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token source newspeak'>+</span></code>
+and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>4</span></code> is an argument. In binary messages, the selector is always an
+operator. Operators are often the standard ones like <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token source newspeak'>+</span></code> or <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token source newspeak'>*</span></code>, but they
+can be more complicated.
+</p>
+<p class="indent para-continue">All binary sends have the same precedence
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="3 + 4 * 2" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span><span class='token white newspeak'> </span><span class='token source newspeak'>*</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span></code></pre></div>
+<p class="para-continue">Binary sends have lower precedence than unary sends
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="9 + 16 sqrt" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>9</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>16</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>sqrt</span></code></pre></div><h3 id="sec-keyword-sends"   style="bookmark:3.3.&#8194;Keyword Sends"><span class="heading-before"><span class="heading-label">3.3</span>.&#8194;</span>Keyword Sends</h3>
+<p class="para-continue">The most general kind of send is a <em>keyword send</em>, where the message can
+include one or more arguments.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="5 between: 3 and: 7" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>5</span><span class='token white newspeak'> </span><span class='token type newspeak'>between</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token type newspeak'>and</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>7</span></code></pre></div>
+<p>Here, <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>5</span></code> is the receiver and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token type newspeak'>between</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token type newspeak'>and</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>7</span></code> is the message.
+The selector is <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token type newspeak'>between</span><span class='token delimiter colon newspeak'>:</span><span class='token type newspeak'>and</span><span class='token delimiter colon newspeak'>:</span></code> and the arguments are <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>3</span></code> and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>7</span></code>.
+</p>
+<p class="indent">Keyword sends use <em>keyword selectors</em>, which are made out of one or more
+<em>keywords</em>. A keyword is an identifier with a colon at the end. Each
+colon marks a place where an argument can appear.
+</p>
+<p class="indent para-continue">Keyword sends have lower precedence than binary sends.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="5 between: 4 sqrt + 1 and: 2*6" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>5</span><span class='token white newspeak'> </span><span class='token type newspeak'>between</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>sqrt</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token type newspeak'>and</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token source newspeak'>*</span><span class='token number newspeak'>6</span></code></pre></div>
+<p>You can see that 5 is between 3 and 12.
+</p><h2 id="sec-closures"   style="bookmark:4.&#8194;Closures"><span class="heading-before"><span class="heading-label">4</span>.&#8194;</span>Closures</h2>
+<p class="para-continue"><em>Closures</em> allow us to declare functions in line. 
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[3 + 4]" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span></code></pre></div>
+<p class="para-continue">A closure is delimited by square brackets. The code inside the closure
+isn&#39;t evaluated until the closure is sent the message value.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[3 + 4] value" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>value</span></code></pre></div>
+<p class="para-continue">Closures can take parameters
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[:x | 2 * x] value: 21" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token delimiter colon newspeak'>:</span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token white newspeak'> </span><span class='token source newspeak'>*</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token type newspeak'>value</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>21</span></code></pre></div>
+<p>Each parameter is declared via an identifier with a leading colon. The
+parameter list ends with vertical bar, which is then followed by the body
+of the closure. Our example has only one parameter, <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token delimiter colon newspeak'>:</span><span class='token identifier newspeak'>x</span></code>, but there can be
+many.
+</p><h3 id="sec-declaring-variables"   style="bookmark:4.1.&#8194;Declaring variables"><span class="heading-before"><span class="heading-label">4.1</span>.&#8194;</span>Declaring variables</h3>
+<p class="para-continue">One can declare variables at the beginning of a closure. The variable
+declarations appear between vertical bars.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[ | x | x: 3 + 4] value" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token type newspeak'>x</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>3</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>value</span></code></pre></div>
+<p class="para-continue">You may initialize a variable at its declaration by following it with
+<code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword newspeak'>::=</span></code>, an expression that gives the initial value and a dot. The dot
+serves to separate the initializer from the next variable declaration, if
+any.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[ | x ::= 100.  y ::= 200. z | z: x + y] value" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>::=</span><span class='token white newspeak'> </span><span class='token number newspeak'>100</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'>  </span><span class='token identifier newspeak'>y</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>::=</span><span class='token white newspeak'> </span><span class='token number newspeak'>200</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>z</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token type newspeak'>z</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>y</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>value</span></code></pre></div><h3 id="sec-statements"   style="bookmark:4.2.&#8194;Statements"><span class="heading-before"><span class="heading-label">4.2</span>.&#8194;</span>Statements</h3>
+<p class="para-continue">A closure&#39;s body can contain multiple statements. 
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="[ | x ::= 0. | x: x + 1. x * 2] value" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter square newspeak bracket-open'>[</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>::=</span><span class='token white newspeak'> </span><span class='token number newspeak'>0</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token type newspeak'>x</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>1</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>*</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>value</span></code></pre></div>
+<p>Statements are separated by dots. The value returned by a closure is the
+value of the last statement.
+</p><h2 id="sec-tuples"   style="bookmark:5.&#8194;Tuples"><span class="heading-before"><span class="heading-label">5</span>.&#8194;</span>Tuples</h2>
+<p class="para-continue"><em>Tuples</em> are literal collections.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="{1. true. &#39;false&#39;}" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter curly newspeak bracket-open'>{</span><span class='token number newspeak'>1</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>true</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token string quote newspeak bracket-open'>&apos;</span><span class='token string newspeak'>false</span><span class='token string quote newspeak bracket-close'>&apos;</span><span class='token delimiter curly newspeak bracket-close'>}</span></code></pre></div>
+<p class="para-continue">You can access the elements of a tuple using the selector <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token type newspeak'>at</span><span class='token delimiter colon newspeak'>:</span></code>
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="{1. true. &#39;false&#39;} at: 2" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter curly newspeak bracket-open'>{</span><span class='token number newspeak'>1</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>true</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token string quote newspeak bracket-open'>&apos;</span><span class='token string newspeak'>false</span><span class='token string quote newspeak bracket-close'>&apos;</span><span class='token delimiter curly newspeak bracket-close'>}</span><span class='token white newspeak'> </span><span class='token type newspeak'>at</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span></code></pre></div>
+<p class="para-continue">The elements of tuples need not be literals however - they can be
+arbitrary expresisons.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="{1*3. true not. &#39;false&#39; size}" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter curly newspeak bracket-open'>{</span><span class='token number newspeak'>1</span><span class='token source newspeak'>*</span><span class='token number newspeak'>3</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>true</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>not</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token string quote newspeak bracket-open'>&apos;</span><span class='token string newspeak'>false</span><span class='token string quote newspeak bracket-close'>&apos;</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>size</span><span class='token delimiter curly newspeak bracket-close'>}</span></code></pre></div><h2 id="sec-conditionals"   style="bookmark:6.&#8194;Conditionals"><span class="heading-before"><span class="heading-label">6</span>.&#8194;</span>Conditionals</h2>
+<p class="para-continue">Conditional expressions in Newspeak are just message sends.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="1 &lt; 2 ifTrue: [3] ifFalse: [4]" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span></code></pre></div>
+<p class="para-continue">We just sent the message <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span></code> to the object <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword newspeak'>true</span></code>
+(which we happened to compute by evaluating the expression <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span></code>, as
+you can see below).
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="1 &lt; 2" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span></code></pre></div>
+<p class="para-continue"><code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span></code> is defined on booleans. So is <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span></code>. If you
+only want something done if a test is true, use <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span></code> by itself.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="1 &lt; 2 ifTrue: [3+4]" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token source newspeak'>+</span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span></code></pre></div>
+<p class="para-continue">There is also <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span></code>
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="1 &lt; 2 ifFalse: [3+4]
+" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="5" data-line-code="6"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="6"><span class='token number newspeak'>1</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token number newspeak'>3</span><span class='token source newspeak'>+</span><span class='token number newspeak'>4</span><span class='token delimiter square newspeak bracket-close'>]</span><br></code></pre></div>
+<p>If the condition does not hold, the single-keyword conditionals <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifTrue</span><span class='token delimiter colon newspeak'>:</span></code> and <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword special newspeak'>ifFalse</span><span class='token delimiter colon newspeak'>:</span></code> return <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token keyword newspeak'>nil</span></code>.
+</p><h2 id="sec-loops"   style="bookmark:7.&#8194;Loops"><span class="heading-before"><span class="heading-label">7</span>.&#8194;</span>Loops</h2>
+<p class="para-continue">Loops are of course message sends as well.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="| x ::= 0. | 
+[x &lt; 20] whileTrue: [x: x + 1].
+x" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="6" data-line-code="7"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="7"><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token keyword newspeak'>::=</span><span class='token white newspeak'> </span><span class='token number newspeak'>0</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><br><span class='token delimiter square newspeak bracket-open'>[</span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-open'>&lt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>20</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token white newspeak'> </span><span class='token keyword special newspeak'>whileTrue</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token type newspeak'>x</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>x</span><span class='token white newspeak'> </span><span class='token source newspeak'>+</span><span class='token white newspeak'> </span><span class='token number newspeak'>1</span><span class='token delimiter square newspeak bracket-close'>]</span><span class='token keyword newspeak'>.</span><br><span class='token identifier newspeak'>x</span></code></pre></div>
+<p>Notice how we declared the variable <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token identifier newspeak'>x</span></code> in the evaluator itself, and
+assigned it an initial value in its declaration.
+</p><h2 id="sec-mapping-and-filtering"   style="bookmark:8.&#8194;Mapping and Filtering"><span class="heading-before"><span class="heading-label">8</span>.&#8194;</span>Mapping and Filtering</h2>
+<p class="para-continue">In the following example, we filter a tuple, so we get only those 
+elements that are greater than 2.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="{1. 2. 3} select: [:each | each &gt; 2]" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter curly newspeak bracket-open'>{</span><span class='token number newspeak'>1</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token number newspeak'>3</span><span class='token delimiter curly newspeak bracket-close'>}</span><span class='token white newspeak'> </span><span class='token type newspeak'>select</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token delimiter colon newspeak'>:</span><span class='token identifier newspeak'>each</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>each</span><span class='token white newspeak'> </span><span class='token delimiter angle newspeak bracket-close'>&gt;</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token delimiter square newspeak bracket-close'>]</span></code></pre></div>
+<p class="para-continue">The selector <code class="code code1 language-newspeak lang-newspeak newspeak highlighted" ><span class='token type newspeak'>select</span><span class='token delimiter colon newspeak'>:</span></code> is defined for all collections as are several 
+others. For example, one can compute mappings of collections. Below we compute the squares of a tuple of integers.
+</p>
+<div class="pre-indented para-block" >
+<div class="evaluator" expression="{1. 2. 3} collect: [:each | each * each]" data-line="1" style="margin-top:1em;margin-bottom:1em"></div>
+<pre class="para-block pre-eval pre-fenced pre-fenced3 language-newspeak lang-newspeak newspeak highlighted" data-line="4" data-line-code="5"  style="padding:0.5ex;border-style:solid;border-color:black;border-width:1px"><code data-line="5"><span class='token delimiter curly newspeak bracket-open'>{</span><span class='token number newspeak'>1</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token number newspeak'>2</span><span class='token keyword newspeak'>.</span><span class='token white newspeak'> </span><span class='token number newspeak'>3</span><span class='token delimiter curly newspeak bracket-close'>}</span><span class='token white newspeak'> </span><span class='token type newspeak'>collect</span><span class='token delimiter colon newspeak'>:</span><span class='token white newspeak'> </span><span class='token delimiter square newspeak bracket-open'>[</span><span class='token delimiter colon newspeak'>:</span><span class='token identifier newspeak'>each</span><span class='token white newspeak'> </span><span class='token source newspeak'>|</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>each</span><span class='token white newspeak'> </span><span class='token source newspeak'>*</span><span class='token white newspeak'> </span><span class='token identifier newspeak'>each</span><span class='token delimiter square newspeak bracket-close'>]</span></code></pre></div>
+<div class="logomadoko block" style="text-align:right;font-size:xx-small;margin-top:4em"><span data-line="1"></span>Created with&nbsp;<a href="https://www.madoko.net">Madoko.net</a>.</div>
+</body>
+<script type="text/javascript" class="preview" src="http://bracha.org/Literate/Literate.js"></script>
+</html>
